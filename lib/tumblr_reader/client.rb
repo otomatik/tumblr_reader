@@ -5,7 +5,7 @@ module TumblrReader
 		attr_accessor :tumblr_url
 
 		def initialize url
-			@tumblr_url = url
+			@tumblr_url = url.sub(/(\/)+$/,'')
 		end
 
 		def get_article url

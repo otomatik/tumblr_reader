@@ -6,7 +6,7 @@ describe TumblrReader::Client do
 	let(:article_url) { 'http://lesjoiesducode.fr/post/97566501525/quand-lappli-passe-tous-les-tests-sans-probleme' }
 	
 	describe "client initialization" do
-		subject { TumblrReader::Client.new tumblr_url }
+		subject { TumblrReader::Client.new "#{tumblr_url}/" }
 		it { expect(subject.tumblr_url).to eq tumblr_url }
 	end
 
