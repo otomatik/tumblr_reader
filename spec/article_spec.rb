@@ -17,26 +17,15 @@ describe TumblrReader::Article do
 		"""
 	end
 
-	let(:article) { TumblrReader::Article.new data }
+	let(:gif_url) { "http://url.com/image.gif" }
 
-	describe "retrieve the title of an article" do
-		subject { article.title }
-		it { should eq "Title" }
-	end
-
-	describe "extract all links in an article" do
-		subject { article.links }
-		it { should eq ["http://thomas.dalo.us/", "http://url.com/image.gif"] }
-	end
-
-	describe "extract images links in an article" do
-		subject { article.images }
-		it { should eq ["http://url.com/image.gif"] }
-	end
-
-	describe "aggregate tags of an article" do
-		subject { article.tags }
-		it { should eq ["tagA", "tagB"] }
+	describe "article initialization" do
+		subject { TumblrReader::Article.new data }
+		
+		it { expect(subject.title).to eq "Title" }
+		it { expect(subject.links).to eq ["http://thomas.dalo.us/", gif_url] }
+		it { expect(subject.images).to eq [gif_url] }
+		it { expect(subject.tags).to eq ["tagA", "tagB"] }
 	end
 
 end
