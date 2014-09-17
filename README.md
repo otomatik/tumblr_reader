@@ -1,5 +1,7 @@
 # TumblrReader
 
+Read posts from any Tumblr easily thanks to the xml API.
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -19,7 +21,7 @@ Or install it yourself as:
 ## Usage
 
 ```
-tumblr_reader = TumblrReader::Client.new "http://lesjoiesducode.com/"
+tumblr_reader = TumblrReader::Client.new "http://lesjoiesducode.fr/"
 
 random_article = tumblr_reader.get_random_article
 => Article obj, with the following accessors:
