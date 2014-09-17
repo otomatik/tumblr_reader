@@ -15,4 +15,10 @@ describe TumblrReader::Client do
 		subject { tumblr_reader_client.get_article(article_url).title }
 		it { should eq "Quand l'appli passe tous les tests sans problème" }
 	end
+
+	describe ".get_random_article" do
+		let(:tumblr_reader_client) { TumblrReader::Client.new tumblr_url }
+		subject { tumblr_reader_client.get_random_article.title }
+		it { should_not be_empty }
+	end
 end
