@@ -1,20 +1,29 @@
-require 'net/http'
+require 'open-uri'
 module TumblrReader
 
 	class Client
 		attr_accessor :tumblr_url
 
 		def initialize url
-			@tumblr_url = url.sub(/(\/)+$/,'')
+			@tumblr_url = follow url
 		end
 
 		def get_article url
-			TumblrReader::Article.new Net::HTTP.get_response(URI.parse("#{url}/xml")).body
+			TumblrReader::Article.new Net::HTTP.get_response(URI.parse("#{clean_url url}/xml")).body
 		end
 
 		def get_random_article
-			redirection = Net::HTTP.get_response(URI.parse("#{self.tumblr_url}/random"))
-			get_article redirection['location'][0..-5]
+			get_article follow "#{self.tumblr_url}/random"
+		end
+
+		def follow url
+			final_uri = ''
+			open(clean_url url) { |h| final_uri = h.base_uri.to_s }
+			clean_url final_uri
+		end
+
+		def clean_url url
+			url.sub(/(\/)?(#_=_)?$/,'')
 		end
 	end
 end
