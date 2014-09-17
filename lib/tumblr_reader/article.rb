@@ -5,7 +5,7 @@ module TumblrReader
 
 	class Article
 
-		attr_accessor :title, :body, :tags
+		attr_accessor :title, :body, :tags, :links
 
 		def initialize data
 			self.parse LibXML::XML::Parser.string data
@@ -16,10 +16,11 @@ module TumblrReader
 			self.title = article.find_first('//regular-title').content
 			self.body  = article.find_first('//regular-body').content
 			self.tags  = article.find('//tag').to_a.map(&:content)
+			self.links = URI.extract(self.body)
 		end
 
-		def image
-			URI.extract(self.body).first # /https?:\/\/[\S]+.gif/
+		def images
+			self.links.select { |link| link.match(/.png|jpg|gif$/) }
 		end
 	end
 end

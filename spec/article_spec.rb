@@ -8,7 +8,7 @@ describe TumblrReader::Article do
 			<posts>
 				<post>
 					<regular-title>Title</regular-title>
-					<regular-body>&lt;img src=\"http://ljdchost.com/f2oTSyF.gif\"/&gt;</regular-body>
+					<regular-body>&lt;a href=\"http://thomas.dalo.us/\"/&gt; &lt;img src=\"http://url.com/image.gif\"/&gt;</regular-body>
 					<tag>tagA</tag>
 					<tag>tagB</tag>
 				</post>
@@ -24,9 +24,14 @@ describe TumblrReader::Article do
 		it { should eq "Title" }
 	end
 
-	describe "extract the image link in an article" do
-		subject { article.image }
-		it { should eq "http://ljdchost.com/f2oTSyF.gif" }
+	describe "extract all links in an article" do
+		subject { article.links }
+		it { should eq ["http://thomas.dalo.us/", "http://url.com/image.gif"] }
+	end
+
+	describe "extract images links in an article" do
+		subject { article.images }
+		it { should eq ["http://url.com/image.gif"] }
 	end
 
 	describe "aggregate tags of an article" do
