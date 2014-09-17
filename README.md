@@ -18,7 +18,20 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+tumblr_reader = TumblrReader::Client.new "http://lesjoiesducode.com/"
+
+random_article = tumblr_reader.get_random_article
+=> Article obj, with the following accessors:
+random_article.title  # returns "the title of the article"
+random_article.body   # returns "html body"
+random_article.images # returns ["http://image.com/1st.gif", "http://image.com/2nd.jpg"]
+random_article.links  # returns images + ["http://other_links.com"]
+random_article.tags   # returns ["1st_tag", "2nd_tag"]
+
+a_specific_article = tumblr_reader.get_article "http://lesjoiesducode.fr/post/:id/slug"
+=> Article obj
+```
 
 ## Contributing
 
