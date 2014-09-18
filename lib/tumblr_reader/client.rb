@@ -9,7 +9,7 @@ module TumblrReader
 		end
 
 		def get_article url
-			TumblrReader::Article.new Net::HTTP.get_response(URI.parse("#{clean_url url}/xml")).body
+			TumblrReader::Article.new open("#{clean_url url}/xml").read
 		end
 
 		def get_random_article
